@@ -1,0 +1,149 @@
+{
+ "updated": "2026-09-23",
+ "sources": [
+  {
+   "company": "Merck",
+   "type": "workday",
+   "ok": true,
+   "found": 500,
+   "matched": 13,
+   "error": ""
+  },
+  {
+   "company": "Pfizer",
+   "type": "workday",
+   "ok": true,
+   "found": 254,
+   "matched": 1,
+   "error": ""
+  },
+  {
+   "company": "Johnson & Johnson",
+   "type": "workday",
+   "ok": true,
+   "found": 500,
+   "matched": 4,
+   "error": ""
+  },
+  {
+   "company": "Bristol Myers Squibb",
+   "type": "workday",
+   "ok": true,
+   "found": 436,
+   "matched": 0,
+   "error": ""
+  },
+  {
+   "company": "Gilead",
+   "type": "workday",
+   "ok": true,
+   "found": 500,
+   "matched": 12,
+   "error": ""
+  },
+  {
+   "company": "Amgen",
+   "type": "workday",
+   "ok": true,
+   "found": 499,
+   "matched": 2,
+   "error": ""
+  },
+  {
+   "company": "Novartis",
+   "type": "workday",
+   "ok": true,
+   "found": 500,
+   "matched": 3,
+   "error": ""
+  },
+  {
+   "company": "AstraZeneca",
+   "type": "workday",
+   "ok": true,
+   "found": 500,
+   "matched": 0,
+   "error": ""
+  },
+  {
+   "company": "GSK",
+   "type": "workday",
+   "ok": true,
+   "found": 376,
+   "matched": 0,
+   "error": ""
+  },
+  {
+   "company": "Sanofi",
+   "type": "workday",
+   "ok": true,
+   "found": 500,
+   "matched": 4,
+   "error": ""
+  },
+  {
+   "company": "Takeda",
+   "type": "workday",
+   "ok": false,
+   "found": 0,
+   "matched": 0,
+   "error": "HTTPError: HTTP Error 422: "
+  },
+  {
+   "company": "Regeneron",
+   "type": "workday",
+   "ok": true,
+   "found": 233,
+   "matched": 0,
+   "error": ""
+  },
+  {
+   "company": "Biogen",
+   "type": "workday",
+   "ok": true,
+   "found": 210,
+   "matched": 1,
+   "error": ""
+  },
+  {
+   "company": "BeOne Medicines",
+   "type": "workday",
+   "ok": true,
+   "found": 216,
+   "matched": 0,
+   "error": ""
+  },
+  {
+   "company": "BD",
+   "type": "workday",
+   "ok": true,
+   "found": 361,
+   "matched": 0,
+   "error": ""
+  },
+  {
+   "company": "Thermo Fisher (Evidera, PPD)",
+   "type": "workday",
+   "ok": true,
+   "found": 500,
+   "matched": 0,
+   "error": ""
+  },
+  {
+   "company": "IQVIA",
+   "type": "workday",
+   "ok": true,
+   "found": 500,
+   "matched": 3,
+   "error": ""
+  },
+  {
+   "company": "Precision Medicine Group (Precision AQ)",
+   "type": "greenhouse",
+   "ok": true,
+   "found": 166,
+   "matched": 1,
+   "error": ""
+  }
+ ]
+}
