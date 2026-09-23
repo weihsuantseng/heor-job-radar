@@ -1,0 +1,124 @@
+# =====================================================================
+# HEOR Job Radar settings
+# Edit this file on GitHub (pencil icon) to add companies or keywords.
+# Lines starting with # are comments and are ignored.
+# =====================================================================
+
+keywords:
+  # A title must contain one of these to count as an internship
+  intern: ["intern", "internship", "co-op", "summer associate", "summer analyst", "future talent"]
+
+  # Titles with any of these are tagged HEOR
+  heor:
+    - "health economic"
+    - "outcomes research"
+    - "heor"
+    - "real world"
+    - "real-world"
+    - "rwe"
+    - "market access"
+    - "value & access"
+    - "value and access"
+    - "value & evidence"
+    - "value and evidence"
+    - "value & implementation"
+    - "v&i"
+    - "evidence generation"
+    - "health technology assessment"
+    - "pricing"
+    - "reimbursement"
+    - "patient access"
+
+  # Titles with any of these (but no HEOR word) are tagged as related
+  related:
+    - "epidemiolog"
+    - "health policy"
+    - "biostatistic"
+    - "decision science"
+    - "data science"
+    - "medical affairs"
+    - "health services"
+    - "evidence"
+
+  # Titles with any of these are skipped
+  exclude: ["pharmacy intern", "manufacturing", "software", "engineering", "retail", "sales intern", "high school"]
+
+  # Skip titles that name an old cycle
+  skip_years: [2024, 2025, 2026]
+
+  # Words typed into each Workday site's search box
+  workday_search: ["intern"]
+
+workday_max_pages: 25     # 20 postings per page
+keep_closed_days: 45      # how long a closed posting stays on the site
+
+# ---------------------------------------------------------------------
+# Companies to check.
+#   type: workday     -> url: the career site address (open any job on the
+#                        company's site; if the address contains
+#                        myworkdayjobs.com, copy everything up to the part
+#                        before /job/)
+#   type: greenhouse  -> board: the word after boards.greenhouse.io/ or
+#                        job-boards.greenhouse.io/
+#   type: lever       -> site: the word after jobs.lever.co/
+#   type: ashby       -> board: the word after jobs.ashbyhq.com/
+# "status" on the website shows which sources worked on the last run.
+# ---------------------------------------------------------------------
+sources:
+  # ---- Pharma / biotech (Workday) ----
+  - company: Merck
+    type: workday
+    url: https://msd.wd5.myworkdayjobs.com/SearchJobs
+  - company: Pfizer
+    type: workday
+    url: https://pfizer.wd1.myworkdayjobs.com/PfizerCareers
+  - company: Johnson & Johnson
+    type: workday
+    url: https://jj.wd5.myworkdayjobs.com/JJ
+  - company: Bristol Myers Squibb
+    type: workday
+    url: https://bristolmyerssquibb.wd5.myworkdayjobs.com/BMS
+  - company: Gilead
+    type: workday
+    url: https://gilead.wd1.myworkdayjobs.com/gileadcareers
+  - company: Amgen
+    type: workday
+    url: https://amgen.wd1.myworkdayjobs.com/Careers
+  - company: Novartis
+    type: workday
+    url: https://novartis.wd3.myworkdayjobs.com/Novartis_Careers
+  - company: AstraZeneca
+    type: workday
+    url: https://astrazeneca.wd3.myworkdayjobs.com/Careers
+  - company: GSK
+    type: workday
+    url: https://gsk.wd5.myworkdayjobs.com/GSKCareers
+  - company: Sanofi
+    type: workday
+    url: https://sanofi.wd3.myworkdayjobs.com/SanofiCareers
+  - company: Takeda
+    type: workday
+    url: https://takeda.wd3.myworkdayjobs.com/External
+  - company: Regeneron
+    type: workday
+    url: https://regeneron.wd1.myworkdayjobs.com/Careers
+  - company: Biogen
+    type: workday
+    url: https://biibhr.wd3.myworkdayjobs.com/external
+  - company: BeOne Medicines
+    type: workday
+    url: https://beigene.wd5.myworkdayjobs.com/BeiGene
+  - company: BD
+    type: workday
+    url: https://bdx.wd1.myworkdayjobs.com/EXTERNAL_CAREER_SITE_USA
+
+  # ---- HEOR consultancies / CROs ----
+  - company: Thermo Fisher (Evidera, PPD)
+    type: workday
+    url: https://thermofisher.wd5.myworkdayjobs.com/ThermoFisherCareers
+  - company: IQVIA
+    type: workday
+    url: https://iqvia.wd1.myworkdayjobs.com/IQVIA
+  - company: Precision Medicine Group (Precision AQ)
+    type: greenhouse
+    board: precisionmedicinegroup

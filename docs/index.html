@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HEOR 實習雷達</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF2F4;--surface:#fff;--ink:#14202B;--muted:#5B6B78;--line:#CBD5DC;
+  --green:#1F5C4F;--green-soft:#D9EAE4;--amber:#9A6412;--amber-soft:#F6E7C8;--slate:#56687A;--slate-soft:#E1E7EC;--red:#A23B32;--focus:#2C7BE5}
+@media (prefers-color-scheme: dark){:root{--bg:#0F171E;--surface:#16212B;--ink:#E4EAEE;--muted:#93A3B0;--line:#2A3945;
+  --green:#74C6AC;--green-soft:#1C3A33;--amber:#E4B660;--amber-soft:#3A2F17;--slate:#A3B3C0;--slate-soft:#243240;--red:#E08A80;--focus:#6AA8FF}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Instrument Sans","Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--green)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto;padding:40px 20px 80px}
+h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.05;letter-spacing:-.02em;margin:0 0 10px}
+.sub{color:var(--muted);margin:0 0 28px;max-width:62ch}
+.stats{display:flex;gap:28px;flex-wrap:wrap;border-top:2px solid var(--ink);padding-top:12px;margin-bottom:28px}
+.stats div{font-size:.85rem;color:var(--muted)}
+.stats b{display:block;font-size:1.7rem;color:var(--ink);line-height:1.1}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:.9rem;padding:6px 12px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+input,select{font:inherit;font-size:.92rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:7px 10px}
+#q{flex:1 1 220px;min-width:0}
+label.tog{font-size:.9rem;display:flex;gap:6px;align-items:center}
+ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+li.job{display:grid;grid-template-columns:4px 1fr auto;gap:0 16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.rail{border-radius:2px;background:var(--slate)}
+li[data-tier="heor"] .rail{background:var(--green)}
+li[data-closed] {opacity:.5}
+.job h3{margin:0;font-size:1rem;line-height:1.35;font-weight:500}
+.job h3 b{font-weight:700;margin-right:6px}
+.facts{font-size:.85rem;color:var(--muted);margin-top:3px;display:flex;flex-wrap:wrap;gap:2px 14px}
+.pill{display:inline-block;font-size:.75rem;font-weight:600;padding:1px 8px;border-radius:4px;margin-left:8px;vertical-align:2px}
+.pill.new{background:var(--amber-soft);color:var(--amber)}
+.pill.heor{background:var(--green-soft);color:var(--green)}
+.pill.rel{background:var(--slate-soft);color:var(--slate)}
+.pill.closed{background:var(--slate-soft);color:var(--slate)}
+.side a{font-size:.9rem;font-weight:600;text-decoration:none;white-space:nowrap}
+.empty{padding:28px 0;color:var(--muted)}
+details{margin-top:36px}
+summary{cursor:pointer;font-weight:600}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;font-size:.86rem;width:100%}
+th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td.err{color:var(--red);white-space:normal;min-width:220px}
+@media (max-width:640px){.wrap{padding:28px 16px 64px}li.job{grid-template-columns:4px 1fr}.side{grid-column:2;margin-top:6px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>HEOR 實習雷達</h1>
+  <p class="sub">每天自動檢查各公司的招募網站，列出職稱和 HEOR、outcomes research、market access 相關的實習。<span id="upd"></span></p>
+  <div class="stats" id="stats"></div>
+
+  <div class="toolbar" id="chips">
+    <button class="chip" data-f="all" aria-pressed="true">全部</button>
+    <button class="chip" data-f="new" aria-pressed="false">7 天內新增</button>
+    <button class="chip" data-f="heor" aria-pressed="false">HEOR</button>
+    <button class="chip" data-f="related" aria-pressed="false">相關領域</button>
+  </div>
+  <div class="toolbar">
+    <input id="q" type="text" placeholder="搜尋職稱、公司或地點" aria-label="搜尋">
+    <select id="co" aria-label="公司"><option value="">所有公司</option></select>
+    <label class="tog"><input type="checkbox" id="showClosed"> 顯示已關閉</label>
+  </div>
+  <ul id="list"><li class="empty">載入中…</li></ul>
+
+  <details>
+    <summary>資料來源狀態</summary>
+    <p class="sub" style="margin:8px 0 0">「找到」是該網站搜尋 intern 的結果數，「符合」是篩選後列出的數目。失敗的來源通常是網址有誤，把錯誤訊息貼給 Claude 就能修正。</p>
+    <div class="tbl"><table><thead><tr><th>公司</th><th>系統</th><th>狀態</th><th>找到</th><th>符合</th><th>錯誤訊息</th></tr></thead><tbody id="src"></tbody></table></div>
+  </details>
+</div>
+<script>
+(function(){
+  var jobs=[], filter="all";
+  var $=function(id){return document.getElementById(id)};
+  function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+  function daysAgo(d){return (Date.now()-new Date(d+"T00:00:00").getTime())/864e5}
+
+  $("chips").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;filter=b.dataset.f;
+    this.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});render()});
+  ["q","co","showClosed"].forEach(function(id){$(id).addEventListener("input",render);$(id).addEventListener("change",render)});
+
+  function render(){
+    var q=$("q").value.trim().toLowerCase(), co=$("co").value, sc=$("showClosed").checked;
+    var rows=jobs.filter(function(j){
+      if(!sc && j.active===false) return false;
+      if(filter==="new" && daysAgo(j.first_seen)>7) return false;
+      if(filter==="heor" && j.tier!=="heor") return false;
+      if(filter==="related" && j.tier!=="related") return false;
+      if(co && j.company!==co) return false;
+      if(q && (j.title+" "+j.company+" "+j.location).toLowerCase().indexOf(q)<0) return false;
+      return true;
+    });
+    var list=$("list"); list.textContent="";
+    if(!rows.length){list.appendChild(el("li","empty",jobs.length?"沒有符合條件的職缺。":"目前沒有找到符合條件的實習。雷達每天會再檢查一次。"));return}
+    rows.forEach(function(j){
+      var li=el("li","job"); li.dataset.tier=j.tier; if(j.active===false) li.dataset.closed="1";
+      li.appendChild(el("div","rail"));
+      var m=el("div"), h=el("h3");
+      h.appendChild(el("b",null,j.company)); h.appendChild(document.createTextNode(j.title));
+      if(j.active===false) h.appendChild(el("span","pill closed","已關閉"));
+      else if(daysAgo(j.first_seen)<=7) h.appendChild(el("span","pill new","新"));
+      h.appendChild(el("span","pill "+(j.tier==="heor"?"heor":"rel"), j.tier==="heor"?"HEOR":"相關"));
+      m.appendChild(h);
+      var f=el("div","facts");
+      [j.location||"地點未標示", "首次出現 "+j.first_seen, j.posted?"網站標示："+j.posted:""].forEach(function(x){if(x)f.appendChild(el("span",null,x))});
+      m.appendChild(f); li.appendChild(m);
+      var s=el("div","side"), a=el("a",null,"查看職缺"); a.href=j.url; a.target="_blank"; a.rel="noopener noreferrer"; s.appendChild(a); li.appendChild(s);
+      list.appendChild(li);
+    });
+  }
+
+  function stats(){
+    var act=jobs.filter(function(j){return j.active!==false});
+    var n7=act.filter(function(j){return daysAgo(j.first_seen)<=7}).length;
+    var heor=act.filter(function(j){return j.tier==="heor"}).length;
+    var cos=new Set(act.map(function(j){return j.company})).size;
+    var s=$("stats"); s.textContent="";
+    [[act.length,"開放中的職缺"],[n7,"7 天內新增"],[heor,"HEOR 職缺"],[cos,"公司"]].forEach(function(p){var d=el("div");d.appendChild(el("b",null,p[0]));d.appendChild(document.createTextNode(p[1]));s.appendChild(d)});
+    var names=Array.from(new Set(jobs.map(function(j){return j.company}))).sort();
+    names.forEach(function(n){var o=el("option",null,n);o.value=n;$("co").appendChild(o)});
+  }
+
+  var bust="?t="+Date.now();
+  fetch("jobs.json"+bust).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){
+    jobs=d.jobs||[]; $("upd").textContent=" 最後更新："+d.updated+"。"; stats(); render();
+  }).catch(function(){ $("list").innerHTML=""; $("list").appendChild(el("li","empty","還沒有資料。到 GitHub 的 Actions 頁面手動執行一次「Update job list」，幾分鐘後重新整理這頁。")) });
+  fetch("status.json"+bust).then(function(r){return r.json()}).then(function(d){
+    var tb=$("src"); (d.sources||[]).forEach(function(s){var tr=el("tr");
+      [s.company,s.type,s.ok?"正常":"失敗",s.found,s.matched].forEach(function(x){tr.appendChild(el("td",null,String(x)))});
+      tr.appendChild(el("td","err",s.error||"")); tb.appendChild(tr)});
+  }).catch(function(){});
+})();
+</script>
+</body>
+</html>
