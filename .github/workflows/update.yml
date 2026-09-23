@@ -1,0 +1,56 @@
+name: Update job list
+
+on:
+  schedule:
+    - cron: "0 14 * * *"   # every day 14:00 UTC = 7:00 AM Seattle (summer time)
+  workflow_dispatch:        # adds a "Run workflow" button for manual runs
+
+permissions:
+  contents: write   # save the updated job list
+  issues: write     # open an issue (email alert) when new jobs appear
+  pages: write      # publish the website
+  id-token: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install packages
+        run: pip install -r requirements.txt
+
+      - name: Check career sites
+        run: python scraper.py
+
+      - name: Save results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          git diff --cached --quiet || git commit -m "Update jobs $(date -u +%F)"
+          git push
+
+      - name: Email alert for new jobs
+        if: hashFiles('new_jobs.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "新職缺 $(date -u +%F)" --body-file new_jobs.md
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: deploy
+        uses: actions/deploy-pages@v4
