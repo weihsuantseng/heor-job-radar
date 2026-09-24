@@ -6,10 +6,8 @@ on:
   workflow_dispatch:        # adds a "Run workflow" button for manual runs
 
 permissions:
-  contents: write   # save the updated job list
+  contents: write   # save the updated job list (the website reads it from docs/)
   issues: write     # open an issue (email alert) when new jobs appear
-  pages: write      # publish the website
-  id-token: write
 
 concurrency:
   group: update
@@ -18,9 +16,6 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -50,10 +45,3 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh issue create --title "新職缺 $(date -u +%F)" --body-file new_jobs.md
-
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs
-      - id: deploy
-        uses: actions/deploy-pages@v4
