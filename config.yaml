@@ -6,7 +6,11 @@
 
 keywords:
   # A title must contain one of these to count as an internship
-  intern: ["intern", "internship", "co-op", "summer associate", "summer analyst", "future talent"]
+  intern: ["intern", "internship", "co-op", "summer associate", "summer analyst", "future talent", "實習", "工讀"]
+
+  # ...or one of these to count as part-time work
+  # (Google results also use the job's own "Part-time" / "Contractor" label)
+  part_time: ["part-time", "part time", "parttime", "contractor", "freelance", "per diem", "hourly", "兼職", "部分工時", "約聘"]
 
   # Titles with any of these are tagged HEOR
   heor:
@@ -28,6 +32,14 @@ keywords:
     - "pricing"
     - "reimbursement"
     - "patient access"
+    - "健康經濟"
+    - "藥物經濟"
+    - "藥品經濟"
+    - "市場准入"
+    - "市場進入"
+    - "真實世界"
+    - "健保"
+    - "醫療科技評估"
 
   # Titles with any of these (but no HEOR word) are tagged as related
   related:
@@ -39,6 +51,20 @@ keywords:
     - "medical affairs"
     - "health services"
     - "evidence"
+    - "流行病學"
+    - "生物統計"
+    - "衛生政策"
+    - "醫藥政策"
+    - "醫學事務"
+
+  # Google results only: if the title has no HEOR word but the job
+  # description contains one of these, keep it and tag it as related
+  heor_in_description:
+    - "health economics and outcomes research"
+    - "outcomes research"
+    - "cost-effectiveness"
+    - "real-world evidence"
+    - "market access"
 
   # Titles with any of these are skipped
   exclude: ["pharmacy intern", "manufacturing", "software", "engineering", "retail", "sales intern", "high school"]
@@ -47,7 +73,32 @@ keywords:
   skip_years: [2024, 2025, 2026]
 
   # Words typed into each Workday site's search box
-  workday_search: ["intern"]
+  workday_search: ["intern", "part time"]
+
+# ---------------------------------------------------------------------
+# Locations: only keep jobs in the US or Taiwan.
+# A job is dropped only when its location clearly names another country.
+# Jobs with unclear locations ("Remote", "3 Locations") are kept and
+# marked on the website so you can check them.
+# ---------------------------------------------------------------------
+locations:
+  taiwan: ["taiwan", "taipei", "hsinchu", "taichung", "kaohsiung", "tainan", "taoyuan",
+           "台灣", "臺灣", "台北", "臺北", "新北", "新竹", "台中", "臺中", "高雄", "台南", "臺南", "桃園"]
+  us: ["united states", " usa", "u.s.", " us ", "us-", "us -", "alabama", "alaska", "arizona", "arkansas",
+       "california", "colorado", "connecticut", "delaware", "florida", "georgia", "hawaii", "idaho",
+       "illinois", "indiana", "iowa", "kansas", "kentucky", "louisiana", "maine", "maryland",
+       "massachusetts", "michigan", "minnesota", "mississippi", "missouri", "montana", "nebraska",
+       "nevada", "new hampshire", "new jersey", "new mexico", "new york", "north carolina",
+       "north dakota", "ohio", "oklahoma", "oregon", "pennsylvania", "rhode island",
+       "south carolina", "south dakota", "tennessee", "texas", "utah", "vermont", "virginia",
+       "washington", "west virginia", "wisconsin", "wyoming"]
+  other_countries: ["canada", "mexico", "brazil", "argentina", "colombia", "chile", "united kingdom",
+       " uk", "england", "scotland", "ireland", "germany", "france", "spain", "italy", "switzerland",
+       "netherlands", "belgium", "sweden", "denmark", "norway", "finland", "austria", "poland",
+       "czech", "hungary", "portugal", "greece", "israel", "turkey", "india", "china", "shanghai",
+       "beijing", "hong kong", "japan", "tokyo", "korea", "seoul", "singapore", "malaysia",
+       "thailand", "bengaluru", "bangalore", "mumbai", "hyderabad", "pune", "chennai", "delhi", "vietnam", "philippines", "indonesia", "australia", "new zealand", "south africa",
+       "egypt", "saudi", "emirates", "dubai", "puerto rico"]
 
 workday_max_pages: 25     # 20 postings per page
 keep_closed_days: 45      # how long a closed posting stays on the site
@@ -122,3 +173,38 @@ sources:
   - company: Precision Medicine Group (Precision AQ)
     type: greenhouse
     board: precisionmedicinegroup
+
+  # ---- Google Jobs (via SerpApi) ----
+  # Keep this last: company sites run first, so their direct links win
+  # when the same job also shows up on Google.
+  # Covers sites the other sources can't reach: AbbVie, Genentech, Lilly,
+  # Analysis Group, research institutes, and any other employer Google indexes.
+  # Each query uses 1 of the free plan's monthly searches.
+  # Monthly use = number of queries x run days per month.
+  # US: 7 x ~13 days = ~91; Taiwan: 3 x ~9 days = ~27; total ~118.
+  # Check your quota on the SerpApi dashboard and trim if needed.
+  - company: Google Jobs (US)
+    type: google_jobs
+    location: United States
+    gl: us
+    hl: en
+    run_on: [Mon, Wed, Fri]
+    queries:
+      - "HEOR intern"
+      - "health economics outcomes research internship"
+      - "outcomes research intern pharmaceutical"
+      - "market access intern pharmaceutical"
+      - "HEOR part time"
+      - "health economics research part time remote"
+      - "health policy research intern institute"
+
+  - company: Google Jobs (Taiwan)
+    type: google_jobs
+    location: Taiwan
+    gl: tw
+    hl: zh-TW
+    run_on: [Tue, Fri]
+    queries:
+      - "HEOR intern"
+      - "market access 實習"
+      - "藥物經濟 實習 OR 兼職"
