@@ -14,3 +14,11 @@ Checks company career sites every morning for HEOR, outcomes research, and marke
 - **Change keywords:** edit the `keywords` section of `config.yaml`.
 - **Run now:** Actions tab > Update job list > Run workflow.
 - **Check which sites work:** open the website and expand the source status section at the bottom.
+
+## Google Jobs (optional but recommended)
+
+The `google_jobs` source reaches employers whose career sites can't be read directly (AbbVie, Genentech, Analysis Group, research institutes). It needs a free SerpApi key saved as a repository secret named `SERPAPI_KEY` (Settings > Secrets and variables > Actions). Without the key, that source is skipped and everything else still runs. It runs on the days listed in `run_on`; manual runs always include it.
+
+## Locations
+
+Only jobs in the US or Taiwan are kept (`locations` in `config.yaml`). A job is dropped only when its location clearly names another country; unclear ones ("Remote", "3 Locations") are kept and labeled on the website.

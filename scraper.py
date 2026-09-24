@@ -10,11 +10,12 @@ Lever, Ashby), keeps the ones that look HEOR-related, and writes:
 import datetime as dt
 import hashlib
 import json
+import os
 import pathlib
 import re
 import sys
 import time
-from urllib.parse import urlparse
+from urllib.parse import urlencode, urlparse
 
 import yaml
 
@@ -141,7 +142,37 @@ def fetch_workday(src, cfg):
     return out
 
 
-FETCHERS = {"greenhouse": fetch_greenhouse, "lever": fetch_lever,
+def fetch_google_jobs(src, cfg):
+    """Google Jobs via SerpApi. Covers company sites we can't reach directly
+    (AbbVie, Genentech, Analysis Group, research institutes, ...)."""
+    key = os.environ.get("SERPAPI_KEY")
+    if not key:
+        raise RuntimeError("SERPAPI_KEY secret is not set")
+    out = []
+    for q in src["queries"]:
+        data = get_json("https://serpapi.com/search.json?" + urlencode({
+            "engine": "google_jobs", "q": q, "gl": src.get("gl", "us"), "hl": src.get("hl", "en"),
+            "location": src.get("location", "United States"), "api_key": key}))
+        if data.get("error") and "hasn't returned any results" not in data["error"]:
+            raise RuntimeError(data["error"])
+        for j in data.get("jobs_results", []):
+            ext = j.get("detected_extensions") or {}
+            apply = j.get("apply_options") or []
+            out.append({
+                "title": j.get("title", ""),
+                "company": j.get("company_name", ""),
+                "location": j.get("location", ""),
+                "url": apply[0]["link"] if apply else j.get("share_link", ""),
+                "posted": ext.get("posted_at", ""),
+                "schedule": ext.get("schedule_type", ""),
+                "description": (j.get("description") or "")[:4000],
+                "via": j.get("via", ""),
+            })
+        time.sleep(1)
+    return out
+
+
+FETCHERS = {"google_jobs": fetch_google_jobs, "greenhouse": fetch_greenhouse, "lever": fetch_lever,
             "ashby": fetch_ashby, "workday": fetch_workday}
 
 
@@ -150,10 +181,16 @@ def has_any(text, terms):
     return any(t.lower() in text for t in terms)
 
 
-def classify(title, kw):
-    """Return 'heor', 'related', or None (not relevant)."""
-    t = " " + title.lower() + " "
-    if not has_any(t, kw["intern"]):
+def classify(job, kw):
+    """Return (kind, tier) or None.
+    kind: 'intern' or 'part-time'; tier: 'heor' or 'related'."""
+    t = " " + job["title"].lower() + " "
+    sched = job.get("schedule", "").lower()
+    if has_any(t, kw["intern"]) or "intern" in sched:
+        kind = "intern"
+    elif has_any(t, kw.get("part_time", [])) or sched in ("part-time", "contractor"):
+        kind = "part-time"
+    else:
         return None
     if has_any(t, kw.get("exclude", [])):
         return None
@@ -161,10 +198,40 @@ def classify(title, kw):
         if str(y) in t:
             return None
     if has_any(t, kw["heor"]):
-        return "heor"
+        return kind, "heor"
     if has_any(t, kw.get("related", [])):
-        return "related"
+        return kind, "related"
+    # Google results: accept if the job description itself is clearly HEOR
+    if job.get("description") and has_any(job["description"].lower(), kw.get("heor_in_description", [])):
+        return kind, "related"
     return None
+
+
+US_STATES = ("AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV "
+             "NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY DC").split()
+US_STATE_RE = re.compile(r"(?:^|[,;/|\s(])(" + "|".join(US_STATES) + r")(?:$|[,;/|\s)])")
+
+
+def region_of(location, loc_cfg):
+    """Return 'US', 'TW', '?' (can't tell, keep it), or None (other country, drop)."""
+    raw = location or ""
+    low = raw.lower()
+    if has_any(low, loc_cfg["taiwan"]):
+        return "TW"
+    other = has_any(" " + low + " ", loc_cfg["other_countries"])
+    if has_any(" " + low + " ", loc_cfg["us"]):
+        return "US"
+    if US_STATE_RE.search(raw):          # e.g. "Rahway, NJ"; state codes can clash
+        return "?" if other else "US"    # with country codes ("IN" = India), so be careful
+    if other:
+        return None
+    return "?"
+
+
+def norm_key(company, title):
+    """Loose key so the same job found twice (company site + Google) shows once."""
+    first = re.sub(r"[^a-z]", "", (company or "").lower().split(" ")[0]) if company else ""
+    return first + "|" + re.sub(r"[^a-z0-9]", "", title.lower())
 
 
 def job_id(url):
@@ -179,20 +246,42 @@ def main():
     first_run = not JOBS_FILE.exists()
     old = {} if first_run else {j["id"]: j for j in json.loads(JOBS_FILE.read_text())["jobs"]}
 
-    fetched, status, ok_companies = {}, [], set()
+    fetched, status, ok_companies, skipped = {}, [], set(), set()
+    seen_keys = set()
+    today_wd = dt.date.today().strftime("%a")
     for src in cfg["sources"]:
         name, kind = src["company"], src["type"]
+        days = src.get("run_on")
+        if days and today_wd not in days and not os.environ.get("RUN_ALL"):
+            # keep this source's previous results; just skip it today
+            ok_companies.discard(name)
+            status.append({"company": name, "type": kind, "ok": True, "found": 0, "matched": 0,
+                           "error": f"skipped today (runs on {', '.join(days)})"})
+            skipped.add(name)
+            print(f"[--] {name:<32} skipped today")
+            continue
         row = {"company": name, "type": kind, "ok": False, "found": 0, "matched": 0, "error": ""}
         try:
             jobs = FETCHERS[kind](src, cfg)
             row["ok"], row["found"] = True, len(jobs)
             ok_companies.add(name)
             for j in jobs:
-                tier = classify(j["title"], kw)
-                if tier and j["url"]:
-                    j.update(company=name, source=kind, tier=tier, id=job_id(j["url"]))
-                    fetched[j["id"]] = j
-                    row["matched"] += 1
+                res = classify(j, kw)
+                if not res or not j["url"]:
+                    continue
+                region = region_of(j.get("location", ""), cfg["locations"])
+                if region is None:
+                    continue
+                company = j.get("company") or name
+                key = norm_key(company, j["title"])
+                if key in seen_keys:          # already found on another source
+                    continue
+                seen_keys.add(key)
+                j.pop("description", None)
+                j.update(company=company, source=kind, feed=name, kind=res[0], tier=res[1], region=region,
+                         id=job_id(key if kind == "google_jobs" else j["url"]))
+                fetched[j["id"]] = j
+                row["matched"] += 1
         except Exception as e:  # one broken source should never stop the others
             row["error"] = f"{type(e).__name__}: {str(e)[:160]}"
         status.append(row)
@@ -213,7 +302,8 @@ def main():
     for jid, j in old.items():
         if jid in merged:
             continue
-        if j["company"] in ok_companies and j.get("active", True):
+        feed = j.get("feed", j["company"])
+        if feed in ok_companies and feed not in skipped and j.get("active", True):
             j["active"], j["closed_on"] = False, TODAY   # source worked but posting is gone
         closed = j.get("closed_on")
         if closed and (dt.date.today() - dt.date.fromisoformat(closed)).days > keep_days:
@@ -232,7 +322,8 @@ def main():
     if new and not first_run:
         lines = [f"今天找到 {len(new)} 筆新職缺：", ""]
         for j in sorted(new, key=lambda j: (j["tier"] != "heor", j["company"])):
-            tag = "HEOR" if j["tier"] == "heor" else "相關"
+            tag = ("HEOR" if j["tier"] == "heor" else "相關") + ("，兼職" if j.get("kind") == "part-time" else "") \
+                + {"US": "，美國", "TW": "，台灣", "?": "，地點待確認"}.get(j.get("region"), "")
             lines.append(f"- **{j['company']}** [{j['title']}]({j['url']}) ({tag}, {j['location'] or '地點未標示'})")
         NEW_FILE.write_text("\n".join(lines), encoding="utf-8")
 
