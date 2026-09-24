@@ -65,6 +65,7 @@ keywords:
     - "cost-effectiveness"
     - "real-world evidence"
     - "market access"
+    - "RWE"
 
   # Titles with any of these are skipped
   exclude: ["pharmacy intern", "manufacturing", "software", "engineering", "retail", "sales intern", "high school"]
