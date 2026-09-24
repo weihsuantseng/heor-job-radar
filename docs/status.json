@@ -1,19 +1,19 @@
 {
- "updated": "2026-09-23",
+ "updated": "2026-09-24",
  "sources": [
   {
    "company": "Merck",
    "type": "workday",
    "ok": true,
-   "found": 500,
-   "matched": 13,
+   "found": 496,
+   "matched": 12,
    "error": ""
   },
   {
    "company": "Pfizer",
    "type": "workday",
    "ok": true,
-   "found": 254,
+   "found": 257,
    "matched": 1,
    "error": ""
   },
@@ -22,14 +22,14 @@
    "type": "workday",
    "ok": true,
    "found": 500,
-   "matched": 4,
+   "matched": 3,
    "error": ""
   },
   {
    "company": "Bristol Myers Squibb",
    "type": "workday",
    "ok": true,
-   "found": 436,
+   "found": 463,
    "matched": 0,
    "error": ""
   },
@@ -45,7 +45,7 @@
    "company": "Amgen",
    "type": "workday",
    "ok": true,
-   "found": 499,
+   "found": 500,
    "matched": 2,
    "error": ""
   },
@@ -61,7 +61,7 @@
    "company": "AstraZeneca",
    "type": "workday",
    "ok": true,
-   "found": 500,
+   "found": 499,
    "matched": 0,
    "error": ""
   },
@@ -69,7 +69,7 @@
    "company": "GSK",
    "type": "workday",
    "ok": true,
-   "found": 376,
+   "found": 371,
    "matched": 0,
    "error": ""
   },
@@ -93,7 +93,7 @@
    "company": "Regeneron",
    "type": "workday",
    "ok": true,
-   "found": 233,
+   "found": 227,
    "matched": 0,
    "error": ""
   },
@@ -109,7 +109,7 @@
    "company": "BeOne Medicines",
    "type": "workday",
    "ok": true,
-   "found": 216,
+   "found": 213,
    "matched": 0,
    "error": ""
   },
@@ -117,7 +117,7 @@
    "company": "BD",
    "type": "workday",
    "ok": true,
-   "found": 361,
+   "found": 355,
    "matched": 0,
    "error": ""
   },
@@ -141,7 +141,7 @@
    "company": "Precision Medicine Group (Precision AQ)",
    "type": "greenhouse",
    "ok": true,
-   "found": 166,
+   "found": 168,
    "matched": 1,
    "error": ""
   }
