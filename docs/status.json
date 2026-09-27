@@ -1,19 +1,19 @@
 {
- "updated": "2026-09-26",
+ "updated": "2026-09-27",
  "sources": [
   {
    "company": "Merck",
    "type": "workday",
    "ok": true,
-   "found": 697,
-   "matched": 12,
+   "found": 694,
+   "matched": 13,
    "error": ""
   },
   {
    "company": "Pfizer",
    "type": "workday",
    "ok": true,
-   "found": 277,
+   "found": 275,
    "matched": 0,
    "error": ""
   },
@@ -21,7 +21,7 @@
    "company": "Johnson & Johnson",
    "type": "workday",
    "ok": true,
-   "found": 607,
+   "found": 606,
    "matched": 2,
    "error": ""
   },
@@ -29,7 +29,7 @@
    "company": "Bristol Myers Squibb",
    "type": "workday",
    "ok": true,
-   "found": 604,
+   "found": 603,
    "matched": 0,
    "error": ""
   },
@@ -37,7 +37,7 @@
    "company": "Gilead",
    "type": "workday",
    "ok": true,
-   "found": 516,
+   "found": 515,
    "matched": 11,
    "error": ""
   },
@@ -45,7 +45,7 @@
    "company": "Amgen",
    "type": "workday",
    "ok": true,
-   "found": 821,
+   "found": 818,
    "matched": 1,
    "error": ""
   },
@@ -53,7 +53,7 @@
    "company": "Novartis",
    "type": "workday",
    "ok": true,
-   "found": 660,
+   "found": 659,
    "matched": 2,
    "error": ""
   },
@@ -61,7 +61,7 @@
    "company": "AstraZeneca",
    "type": "workday",
    "ok": true,
-   "found": 725,
+   "found": 732,
    "matched": 0,
    "error": ""
   },
@@ -69,7 +69,7 @@
    "company": "GSK",
    "type": "workday",
    "ok": true,
-   "found": 462,
+   "found": 455,
    "matched": 0,
    "error": ""
   },
@@ -77,7 +77,7 @@
    "company": "Sanofi",
    "type": "workday",
    "ok": true,
-   "found": 638,
+   "found": 636,
    "matched": 3,
    "error": ""
   },
@@ -125,7 +125,7 @@
    "company": "Thermo Fisher (Evidera, PPD)",
    "type": "workday",
    "ok": true,
-   "found": 731,
+   "found": 730,
    "matched": 0,
    "error": ""
   },
@@ -133,7 +133,7 @@
    "company": "IQVIA",
    "type": "workday",
    "ok": true,
-   "found": 899,
+   "found": 900,
    "matched": 1,
    "error": ""
   },
