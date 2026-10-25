@@ -1,11 +1,11 @@
 {
- "updated": "2026-10-24",
+ "updated": "2026-10-25",
  "sources": [
   {
    "company": "Merck",
    "type": "workday",
    "ok": true,
-   "found": 691,
+   "found": 688,
    "matched": 3,
    "error": ""
   },
@@ -13,7 +13,7 @@
    "company": "Pfizer",
    "type": "workday",
    "ok": true,
-   "found": 312,
+   "found": 308,
    "matched": 0,
    "error": ""
   },
@@ -29,7 +29,7 @@
    "company": "Bristol Myers Squibb",
    "type": "workday",
    "ok": true,
-   "found": 573,
+   "found": 572,
    "matched": 0,
    "error": ""
   },
@@ -61,7 +61,7 @@
    "company": "AstraZeneca",
    "type": "workday",
    "ok": true,
-   "found": 743,
+   "found": 740,
    "matched": 1,
    "error": ""
   },
@@ -69,7 +69,7 @@
    "company": "GSK",
    "type": "workday",
    "ok": true,
-   "found": 680,
+   "found": 668,
    "matched": 1,
    "error": ""
   },
@@ -77,7 +77,7 @@
    "company": "Sanofi",
    "type": "workday",
    "ok": true,
-   "found": 695,
+   "found": 694,
    "matched": 1,
    "error": ""
   },
@@ -117,7 +117,7 @@
    "company": "BD",
    "type": "workday",
    "ok": true,
-   "found": 515,
+   "found": 514,
    "matched": 0,
    "error": ""
   },
@@ -125,7 +125,7 @@
    "company": "Thermo Fisher (Evidera, PPD)",
    "type": "workday",
    "ok": true,
-   "found": 735,
+   "found": 734,
    "matched": 0,
    "error": ""
   },
@@ -133,7 +133,7 @@
    "company": "IQVIA",
    "type": "workday",
    "ok": true,
-   "found": 888,
+   "found": 884,
    "matched": 2,
    "error": ""
   },
