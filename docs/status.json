@@ -1,11 +1,11 @@
 {
- "updated": "2026-11-14",
+ "updated": "2026-11-15",
  "sources": [
   {
    "company": "Merck",
    "type": "workday",
    "ok": true,
-   "found": 622,
+   "found": 604,
    "matched": 1,
    "error": ""
   },
@@ -13,7 +13,7 @@
    "company": "Pfizer",
    "type": "workday",
    "ok": true,
-   "found": 346,
+   "found": 342,
    "matched": 0,
    "error": ""
   },
@@ -29,7 +29,7 @@
    "company": "Bristol Myers Squibb",
    "type": "workday",
    "ok": true,
-   "found": 565,
+   "found": 562,
    "matched": 0,
    "error": ""
   },
@@ -37,7 +37,7 @@
    "company": "Gilead",
    "type": "workday",
    "ok": true,
-   "found": 422,
+   "found": 416,
    "matched": 0,
    "error": ""
   },
@@ -53,7 +53,7 @@
    "company": "Novartis",
    "type": "workday",
    "ok": true,
-   "found": 672,
+   "found": 671,
    "matched": 2,
    "error": ""
   },
@@ -61,7 +61,7 @@
    "company": "AstraZeneca",
    "type": "workday",
    "ok": true,
-   "found": 761,
+   "found": 765,
    "matched": 12,
    "error": ""
   },
@@ -69,7 +69,7 @@
    "company": "GSK",
    "type": "workday",
    "ok": true,
-   "found": 638,
+   "found": 633,
    "matched": 0,
    "error": ""
   },
@@ -77,7 +77,7 @@
    "company": "Sanofi",
    "type": "workday",
    "ok": true,
-   "found": 693,
+   "found": 690,
    "matched": 3,
    "error": ""
   },
@@ -101,7 +101,7 @@
    "company": "Biogen",
    "type": "workday",
    "ok": true,
-   "found": 238,
+   "found": 239,
    "matched": 0,
    "error": ""
   },
@@ -125,7 +125,7 @@
    "company": "Thermo Fisher (Evidera, PPD)",
    "type": "workday",
    "ok": true,
-   "found": 732,
+   "found": 731,
    "matched": 0,
    "error": ""
   },
@@ -133,7 +133,7 @@
    "company": "IQVIA",
    "type": "workday",
    "ok": true,
-   "found": 891,
+   "found": 885,
    "matched": 3,
    "error": ""
   },
@@ -141,7 +141,7 @@
    "company": "Precision Medicine Group (Precision AQ)",
    "type": "greenhouse",
    "ok": true,
-   "found": 157,
+   "found": 156,
    "matched": 1,
    "error": ""
   },
