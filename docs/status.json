@@ -1,21 +1,21 @@
 {
- "updated": "2026-11-18",
+ "updated": "2026-11-19",
  "sources": [
   {
    "company": "Merck",
    "type": "workday",
-   "ok": true,
-   "found": 665,
-   "matched": 1,
-   "error": ""
+   "ok": false,
+   "found": 0,
+   "matched": 0,
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "Pfizer",
    "type": "workday",
-   "ok": true,
-   "found": 363,
+   "ok": false,
+   "found": 0,
    "matched": 0,
-   "error": ""
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "Johnson & Johnson",
@@ -28,18 +28,18 @@
   {
    "company": "Bristol Myers Squibb",
    "type": "workday",
-   "ok": true,
-   "found": 586,
-   "matched": 2,
-   "error": ""
+   "ok": false,
+   "found": 0,
+   "matched": 0,
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "Gilead",
    "type": "workday",
-   "ok": true,
-   "found": 406,
+   "ok": false,
+   "found": 0,
    "matched": 0,
-   "error": ""
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "Amgen",
@@ -53,16 +53,16 @@
    "company": "Novartis",
    "type": "workday",
    "ok": true,
-   "found": 677,
-   "matched": 2,
+   "found": 695,
+   "matched": 0,
    "error": ""
   },
   {
    "company": "AstraZeneca",
    "type": "workday",
    "ok": true,
-   "found": 746,
-   "matched": 10,
+   "found": 738,
+   "matched": 8,
    "error": ""
   },
   {
@@ -77,8 +77,8 @@
    "company": "Sanofi",
    "type": "workday",
    "ok": true,
-   "found": 720,
-   "matched": 4,
+   "found": 725,
+   "matched": 5,
    "error": ""
   },
   {
@@ -92,50 +92,50 @@
   {
    "company": "Regeneron",
    "type": "workday",
-   "ok": true,
-   "found": 575,
+   "ok": false,
+   "found": 0,
    "matched": 0,
-   "error": ""
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "Biogen",
    "type": "workday",
    "ok": true,
-   "found": 230,
+   "found": 231,
    "matched": 0,
    "error": ""
   },
   {
    "company": "BeOne Medicines",
    "type": "workday",
-   "ok": true,
-   "found": 265,
+   "ok": false,
+   "found": 0,
    "matched": 0,
-   "error": ""
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "BD",
    "type": "workday",
-   "ok": true,
-   "found": 452,
+   "ok": false,
+   "found": 0,
    "matched": 0,
-   "error": ""
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "Thermo Fisher (Evidera, PPD)",
    "type": "workday",
-   "ok": true,
-   "found": 736,
+   "ok": false,
+   "found": 0,
    "matched": 0,
-   "error": ""
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "IQVIA",
    "type": "workday",
-   "ok": true,
-   "found": 886,
-   "matched": 3,
-   "error": ""
+   "ok": false,
+   "found": 0,
+   "matched": 0,
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "Precision Medicine Group (Precision AQ)",
@@ -149,9 +149,9 @@
    "company": "Google Jobs (US)",
    "type": "google_jobs",
    "ok": true,
-   "found": 18,
-   "matched": 8,
-   "error": ""
+   "found": 0,
+   "matched": 0,
+   "error": "skipped today (runs on Mon, Wed, Fri)"
   },
   {
    "company": "Google Jobs (Taiwan)",
