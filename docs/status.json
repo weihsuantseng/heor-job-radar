@@ -1,11 +1,11 @@
 {
- "updated": "2026-11-20",
+ "updated": "2026-11-21",
  "sources": [
   {
    "company": "Merck",
    "type": "workday",
    "ok": true,
-   "found": 670,
+   "found": 649,
    "matched": 0,
    "error": ""
   },
@@ -13,31 +13,31 @@
    "company": "Pfizer",
    "type": "workday",
    "ok": true,
-   "found": 357,
+   "found": 339,
    "matched": 0,
    "error": ""
   },
   {
    "company": "Johnson & Johnson",
    "type": "workday",
-   "ok": true,
-   "found": 600,
+   "ok": false,
+   "found": 0,
    "matched": 0,
-   "error": ""
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "Bristol Myers Squibb",
    "type": "workday",
-   "ok": true,
-   "found": 589,
-   "matched": 2,
-   "error": ""
+   "ok": false,
+   "found": 0,
+   "matched": 0,
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "Gilead",
    "type": "workday",
    "ok": true,
-   "found": 409,
+   "found": 413,
    "matched": 0,
    "error": ""
   },
@@ -45,7 +45,7 @@
    "company": "Amgen",
    "type": "workday",
    "ok": true,
-   "found": 790,
+   "found": 792,
    "matched": 2,
    "error": ""
   },
@@ -61,23 +61,23 @@
    "company": "AstraZeneca",
    "type": "workday",
    "ok": true,
-   "found": 738,
+   "found": 741,
    "matched": 7,
    "error": ""
   },
   {
    "company": "GSK",
    "type": "workday",
-   "ok": true,
-   "found": 712,
+   "ok": false,
+   "found": 0,
    "matched": 0,
-   "error": ""
+   "error": "HTTPError: HTTP Error 429: "
   },
   {
    "company": "Sanofi",
    "type": "workday",
    "ok": true,
-   "found": 722,
+   "found": 719,
    "matched": 5,
    "error": ""
   },
@@ -93,7 +93,7 @@
    "company": "Regeneron",
    "type": "workday",
    "ok": true,
-   "found": 593,
+   "found": 596,
    "matched": 0,
    "error": ""
   },
@@ -101,7 +101,7 @@
    "company": "Biogen",
    "type": "workday",
    "ok": true,
-   "found": 231,
+   "found": 232,
    "matched": 0,
    "error": ""
   },
@@ -133,7 +133,7 @@
    "company": "IQVIA",
    "type": "workday",
    "ok": true,
-   "found": 884,
+   "found": 887,
    "matched": 2,
    "error": ""
   },
@@ -149,9 +149,9 @@
    "company": "Google Jobs (US)",
    "type": "google_jobs",
    "ok": true,
-   "found": 16,
-   "matched": 9,
-   "error": ""
+   "found": 0,
+   "matched": 0,
+   "error": "skipped today (runs on Mon, Wed, Fri)"
   },
   {
    "company": "Google Jobs (Taiwan)",
@@ -159,7 +159,7 @@
    "ok": true,
    "found": 0,
    "matched": 0,
-   "error": ""
+   "error": "skipped today (runs on Tue, Fri)"
   }
  ]
 }
