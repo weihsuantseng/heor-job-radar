@@ -4,56 +4,56 @@
   {
    "company": "Merck",
    "type": "workday",
-   "ok": false,
-   "found": 0,
+   "ok": true,
+   "found": 638,
    "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "error": ""
   },
   {
    "company": "Pfizer",
    "type": "workday",
-   "ok": false,
-   "found": 0,
+   "ok": true,
+   "found": 372,
    "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "error": ""
   },
   {
    "company": "Johnson & Johnson",
    "type": "workday",
-   "ok": false,
-   "found": 0,
+   "ok": true,
+   "found": 610,
    "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "error": ""
   },
   {
    "company": "Bristol Myers Squibb",
    "type": "workday",
-   "ok": false,
-   "found": 0,
-   "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "ok": true,
+   "found": 583,
+   "matched": 2,
+   "error": ""
   },
   {
    "company": "Gilead",
    "type": "workday",
-   "ok": false,
-   "found": 0,
+   "ok": true,
+   "found": 403,
    "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "error": ""
   },
   {
    "company": "Amgen",
    "type": "workday",
-   "ok": false,
-   "found": 0,
-   "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "ok": true,
+   "found": 798,
+   "matched": 2,
+   "error": ""
   },
   {
    "company": "Novartis",
    "type": "workday",
    "ok": true,
-   "found": 686,
+   "found": 678,
    "matched": 0,
    "error": ""
   },
@@ -61,24 +61,24 @@
    "company": "AstraZeneca",
    "type": "workday",
    "ok": true,
-   "found": 738,
+   "found": 729,
    "matched": 5,
    "error": ""
   },
   {
    "company": "GSK",
    "type": "workday",
-   "ok": false,
-   "found": 0,
+   "ok": true,
+   "found": 667,
    "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "error": ""
   },
   {
    "company": "Sanofi",
    "type": "workday",
    "ok": true,
-   "found": 710,
-   "matched": 6,
+   "found": 712,
+   "matched": 7,
    "error": ""
   },
   {
@@ -92,56 +92,56 @@
   {
    "company": "Regeneron",
    "type": "workday",
-   "ok": false,
-   "found": 0,
+   "ok": true,
+   "found": 590,
    "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "error": ""
   },
   {
    "company": "Biogen",
    "type": "workday",
    "ok": true,
-   "found": 227,
+   "found": 229,
    "matched": 0,
    "error": ""
   },
   {
    "company": "BeOne Medicines",
    "type": "workday",
-   "ok": false,
-   "found": 0,
+   "ok": true,
+   "found": 270,
    "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "error": ""
   },
   {
    "company": "BD",
    "type": "workday",
-   "ok": false,
-   "found": 0,
+   "ok": true,
+   "found": 467,
    "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "error": ""
   },
   {
    "company": "Thermo Fisher (Evidera, PPD)",
    "type": "workday",
-   "ok": false,
-   "found": 0,
+   "ok": true,
+   "found": 736,
    "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "error": ""
   },
   {
    "company": "IQVIA",
    "type": "workday",
-   "ok": false,
-   "found": 0,
-   "matched": 0,
-   "error": "HTTPError: HTTP Error 429: "
+   "ok": true,
+   "found": 883,
+   "matched": 2,
+   "error": ""
   },
   {
    "company": "Precision Medicine Group (Precision AQ)",
    "type": "greenhouse",
    "ok": true,
-   "found": 145,
+   "found": 142,
    "matched": 1,
    "error": ""
   },
